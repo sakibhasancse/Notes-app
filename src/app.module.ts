@@ -2,9 +2,10 @@ import { MiddlewareConsumer, Module, NestModule, RequestMethod } from "@nestjs/c
 import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
 import { AppMiddleware } from "./app.middleware";
+import { TypeOrmModule } from "@nestjs/typeorm";
 
 @Module({
-  imports: [],
+  imports: [TypeOrmModule.forRoot(), ],
   controllers: [AppController],
   providers: [AppService],
 })
