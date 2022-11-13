@@ -23,7 +23,7 @@ export class AppService {
   }
   getProfile(request):Object {
     const {body, params, query, ip, headers, session} = request
-console.log({body, params, query, ip, headers, session})
+      console.log({body, params, query, ip, headers, session})
     return {
       name:"Sakib",
       id:33
