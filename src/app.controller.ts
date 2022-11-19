@@ -19,7 +19,7 @@ export class AppController {
 
   @Get('/profile/:id')
   getProfile(@Req() request: Request, @Param() param: GetProfileByIdParam):Object{
-    return this.appService.getProfile(request);
+    return  this.appService.getProfile(request);
   }
 
 }

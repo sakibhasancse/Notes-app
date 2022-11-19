@@ -20,9 +20,9 @@ const typeOrmOptions: TypeOrmModuleOptions = {
 
 
 @Module({
-  imports: [TypeOrmModule.forRoot(typeOrmOptions), TodoModule, ],
-  controllers: [AppController, TodoController],
-  providers: [AppService, TodoService],
+  imports: [TodoModule, TypeOrmModule.forRoot(typeOrmOptions)],
+  controllers: [AppController],
+  providers: [AppService],
 })
 
 export class AppModule implements NestModule{
