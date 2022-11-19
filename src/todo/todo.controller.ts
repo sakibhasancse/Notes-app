@@ -6,9 +6,7 @@ import { UpdateTodoDto } from "../DTO/update-todo.dto";
 
 @Controller('todos')
 export class TodoController {
-  constructor(private todoService: TodoService) {
-
-  }
+  constructor(private todoService: TodoService) {}
 
   @Get()
   getAllTodos(){
@@ -21,7 +19,7 @@ export class TodoController {
   }
 
   @Put(':id')
-  updateTodo(@Body(ValidationPipe) data: UpdateTodoDto, @Param() param){
-    return this.todoService.updateTodo(data, param)
+  updateTodo(@Body(ValidationPipe) data: UpdateTodoDto, @Param('id') id:number){
+    return this.todoService.updateTodo(data, id)
   }
 }

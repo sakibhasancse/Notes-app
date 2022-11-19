@@ -22,15 +22,12 @@ export class TodoService {
     todo.title = title
     todo.description = description
     todo.status = TodoStatus.OPEN
-     await this.collection.create(todo);
     return await this.collection.save(todo)
   }
 
-  async updateTodo(updateTodoDTO: UpdateTodoDto, todoId){
+  async updateTodo(updateTodoDTO: UpdateTodoDto, id){
     const {description, title} = updateTodoDTO
-    const todo = await this.collection.findOneBy(todoId)
-    todo.title = title
-    todo.description = description
-    return await this.collection.save(todo)
+    await this.collection.update({id}, {description, title});
+    return this.collection.findOneBy({ id })
   }
 }

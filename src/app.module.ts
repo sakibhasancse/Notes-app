@@ -1,11 +1,12 @@
 import { MiddlewareConsumer, Module, NestModule, RequestMethod } from "@nestjs/common";
+import { TypeOrmModule, TypeOrmModuleOptions } from "@nestjs/typeorm";
+
+
 import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
 import { AppMiddleware } from "./app.middleware";
-import { TypeOrmModule, TypeOrmModuleOptions } from "@nestjs/typeorm";
-import { TodoService } from './todo/todo.service';
-import { TodoController } from './todo/todo.controller';
 import { TodoModule } from './todo/todo.module';
+import { AuthModule } from "./auth/auth.module";
 
 const typeOrmOptions: TypeOrmModuleOptions = {
   type: 'mysql',
@@ -20,7 +21,7 @@ const typeOrmOptions: TypeOrmModuleOptions = {
 
 
 @Module({
-  imports: [TodoModule, TypeOrmModule.forRoot(typeOrmOptions)],
+  imports: [TodoModule, AuthModule, TypeOrmModule.forRoot(typeOrmOptions)],
   controllers: [AppController],
   providers: [AppService],
 })
