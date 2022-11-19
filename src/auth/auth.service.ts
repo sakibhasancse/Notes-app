@@ -44,7 +44,12 @@ export class AuthService {
    if(!matchedPassword) {
      throw new UnauthorizedException('Invalid email or password')
    }
-   
-   return user
+
+   const token = await this.jwtService.signAsync({email})
+   return {
+     name: user.name,
+     email: user.email,
+     token
+   }
   }
 }
