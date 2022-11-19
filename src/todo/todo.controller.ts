@@ -1,5 +1,8 @@
-import { Body, Controller, Get, Post } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post, Put, ValidationPipe } from "@nestjs/common";
+
 import { TodoService } from "./todo.service";
+import { CreateTodoDto } from "../DTO/create-todo.dto";
+import { UpdateTodoDto } from "../DTO/update-todo.dto";
 
 @Controller('todos')
 export class TodoController {
@@ -13,8 +16,12 @@ export class TodoController {
   }
 
   @Post()
-  createATodo(@Body() data){
-    const {title, description} = data
-    return this.todoService.createATodo(title, description)
+  createATodo(@Body(ValidationPipe) data: CreateTodoDto){
+    return this.todoService.createATodo(data)
+  }
+
+  @Put(':id')
+  updateTodo(@Body(ValidationPipe) data: UpdateTodoDto, @Param() param){
+    return this.todoService.updateTodo(data, param)
   }
 }
