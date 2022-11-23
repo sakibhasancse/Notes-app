@@ -5,6 +5,8 @@ import { AuthController } from "./auth.controller";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { UserEntity } from "../Entity/user.entity";
 import { JwtModule } from "@nestjs/jwt";
+import { JwtCustomStrategy } from "./jwt-custom.strategy";
+import { PassportModule } from "@nestjs/passport";
 
 @Module({
   imports: [TypeOrmModule.forFeature([UserEntity]),
@@ -14,9 +16,13 @@ import { JwtModule } from "@nestjs/jwt";
         algorithm: "HS512",
         expiresIn: '5d'
       }
+    }),
+    PassportModule.register({
+      defaultStrategy: 'jwt'
     })
   ],
-  providers:[AuthService],
-  controllers:[AuthController]
+  providers: [AuthService, JwtCustomStrategy],
+  controllers: [AuthController],
+  exports: [PassportModule, JwtCustomStrategy]
 })
 export class AuthModule {}

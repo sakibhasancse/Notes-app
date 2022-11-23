@@ -7,21 +7,21 @@ import { ExtractJwt, Strategy } from "passport-jwt";
 import { UnauthorizedException } from "@nestjs/common";
 
 
-export class JwtCustomStrategy extends PassportStrategy(Strategy){
-  constructor(@InjectRepository(UserEntity) private collection : Repository<UserEntity>) {
+export class JwtCustomStrategy extends PassportStrategy(Strategy) {
+  constructor(@InjectRepository(UserEntity) private repo: Repository<UserEntity>) {
     super({
-      JwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       secretOrKey: 'test'
-    })
+    });
   }
 
-  async validate(payload: {email: string}){
-    const {email} = payload
-    const user = await this.collection.findOneBy({email})
-    if(!user) {
-      throw new UnauthorizedException('User not found')
+  async validate(payload: {email: string}) {
+    const {email} = payload;
+    const user = await this.repo.findOneBy({email});
+
+    if (!user) {
+      throw new UnauthorizedException();
     }
-   return user
+    return user;
   }
-
 }

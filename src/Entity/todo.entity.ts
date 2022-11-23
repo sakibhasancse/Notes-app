@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { UserEntity } from "./user.entity";
+import { User } from "../auth/auth.decorator";
 
 export enum TodoStatus {
   OPEN = 'OPEN',
@@ -16,4 +18,7 @@ export class TodoEntity {
   description: String;
   @Column()
   status: TodoStatus;
+
+  @ManyToOne(()=> UserEntity, (user)=> user.todos)
+  user: UserEntity
 }

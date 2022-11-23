@@ -25,8 +25,8 @@ export class AuthService {
     user.name = name
     user.email = email
 
-    const salt = bcrypt.getSalt('12')
-    const hashPassword = await bcrypt.hash(password, String(salt))
+    const salt = bcrypt.genSaltSync(10);
+    const hashPassword =  bcrypt.hashSync(password, salt)
     user.password = hashPassword
 
     return await this.collection.save(user)
@@ -39,7 +39,7 @@ export class AuthService {
    if(!user) {
      throw new UnauthorizedException('Invalid email or password')
    }
-   const matchedPassword = await bcrypt.compare(password, user.password)
+   const matchedPassword =  bcrypt.compareSync(password, user.password)
 
    if(!matchedPassword) {
      throw new UnauthorizedException('Invalid email or password')
