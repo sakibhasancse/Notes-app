@@ -1,11 +1,11 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { UserEntity } from "./user.entity";
-import { User } from "../auth/auth.decorator";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { UserEntity } from './user.entity';
+import { User } from '../auth/auth.decorator';
 
 export enum TodoStatus {
   OPEN = 'OPEN',
   IN_PROGRESS = 'IN_PROGRESS',
-  COMPLETED = 'COMPLETED'
+  COMPLETED = 'COMPLETED',
 }
 
 @Entity('todos')
@@ -13,12 +13,14 @@ export class TodoEntity {
   @PrimaryGeneratedColumn()
   id: number;
   @Column()
-  title: String;
+  title: string;
   @Column()
-  description: String;
+  description: string;
   @Column()
   status: TodoStatus;
 
-  @ManyToOne(()=> UserEntity, (user)=> user.todos)
-  user: UserEntity
+  @ManyToOne(() => UserEntity, (user) => user.todos)
+  user: UserEntity;
+  @Column()
+  userId: number;
 }

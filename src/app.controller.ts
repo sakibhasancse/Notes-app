@@ -1,7 +1,7 @@
-import { Controller, Get, Param, Query, Req } from "@nestjs/common";
+import { Controller, Get, Param, Query, Req } from '@nestjs/common';
 import { AppService } from './app.service';
-import {Request} from "express";
-import { GetProfileByIdParam } from "./app.dto";
+import { Request } from 'express';
+import { GetProfileByIdParam } from './app.dto';
 
 @Controller()
 export class AppController {
@@ -13,13 +13,15 @@ export class AppController {
   }
 
   @Get('/users')
-  getUsers():Object{
+  getUsers(): Object {
     return this.appService.getUsers();
   }
 
   @Get('/profile/:id')
-  getProfile(@Req() request: Request, @Param() param: GetProfileByIdParam):Object{
-    return  this.appService.getProfile(request);
+  getProfile(
+    @Req() request: Request,
+    @Param() param: GetProfileByIdParam,
+  ): Object {
+    return this.appService.getProfile(request);
   }
-
 }

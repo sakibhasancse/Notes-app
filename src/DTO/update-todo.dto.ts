@@ -1,4 +1,4 @@
-import { IsNotEmpty, MaxLength, MinLength } from "class-validator";
+import { IsNotEmpty, MaxLength, MinLength } from 'class-validator';
 
 export class UpdateTodoDto {
   @IsNotEmpty()
@@ -7,5 +7,5 @@ export class UpdateTodoDto {
   @IsNotEmpty()
   @MaxLength(500)
   @MinLength(5)
-  description: string
+  description: string;
 }
